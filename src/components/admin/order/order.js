@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import Sidebar from '../sidebar/sidebar';
+import React, { useEffect, useState } from "react";
+import Sidebar from "../sidebar/sidebar";
 
 const Order = () => {
   const [orders, setOrders] = useState([]);
-  const [loading, setLoading] = useState(false);
+  
+  
 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/order`);
+        const response = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/api/order`
+        );
         const data = await response.json();
         setOrders(data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
@@ -21,18 +24,20 @@ const Order = () => {
 
   const handleDelete = async (orderId) => {
     try {
-      setLoading(true);
+
       // Send a DELETE request to the API endpoint with the order ID
       await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/order/${orderId}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
 
       // Update the orders state after successful deletion
-      setOrders((prevOrders) => prevOrders.filter((order) => order._id !== orderId));
+      setOrders((prevOrders) =>
+        prevOrders.filter((order) => order._id !== orderId)
+      );
     } catch (error) {
-      console.error('Error deleting order:', error);
+      console.error("Error deleting order:", error);
     } finally {
-      setLoading(false);
+      
     }
   };
 
@@ -47,6 +52,7 @@ const Order = () => {
               <th className="px-6 py-3">Address</th>
               <th className="px-6 py-3">Message</th>
               <th className="px-6 py-3">Contact</th>
+              <th className="px-6 py-3">Time</th>
               <th className="px-6 py-3">Payment From</th>
               <th className="px-6 py-3">Action</th>
             </tr>
@@ -55,7 +61,11 @@ const Order = () => {
             {orders.map((order, index) => (
               <tr
                 key={index}
-                className={`${index % 2 === 0 ? 'even:bg-gray-50 even:dark:bg-gray-800' : 'odd:bg-white odd:dark:bg-gray-900'} border-b dark:border-gray-700`}
+                className={`${
+                  index % 2 === 0
+                    ? "even:bg-gray-50 even:dark:bg-gray-800"
+                    : "odd:bg-white odd:dark:bg-gray-900"
+                } border-b dark:border-gray-700`}
               >
                 <td className="px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                   {order.name}
@@ -63,6 +73,8 @@ const Order = () => {
                 <td className="px-6 py-4">{order.address}</td>
                 <td className="px-6 py-4">{order.message}</td>
                 <td className="px-6 py-4">{`${order.contact}`}</td>
+                <td className="px-6 py-4">{`${order.orderDate}`}</td>
+
                 <td className="px-6 py-4">{`${order.payment}`}</td>
                 <td className="px-6 py-4">
                   <button
