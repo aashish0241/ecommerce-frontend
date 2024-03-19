@@ -34,6 +34,7 @@ const Header = () => {
     setCard(Number(localStorage.getItem("cart")) || 0);
   }, []);
   useEffect(() => {
+    //oiuiouiv
     updateLoginStatus();
     window.addEventListener("scroll", fixNavbar);
 
