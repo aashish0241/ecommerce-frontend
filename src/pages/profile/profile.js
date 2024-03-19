@@ -6,7 +6,7 @@ import { getuser, updatephoto, updateuser } from '../../redux/features/auth/auth
 import './profile.scss';
 const cloud_name = process.env.REACT_APP_CLOUD_NAME;
 const upload_preset =process.env.REACT_APP_UPLOAD_PRESET;
-
+//some chnage for git help
 
 const Profile = () => {
   // Retrieve user data from Redux state
