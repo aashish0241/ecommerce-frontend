@@ -32,6 +32,7 @@ const Header = () => {
   useEffect(() => {
     // Update the cart value when it changes in local storage
     setCard(Number(localStorage.getItem("cart")) || 0);
+    //some chnage are gon ehere 
   }, []);
   useEffect(() => {
     updateLoginStatus();
